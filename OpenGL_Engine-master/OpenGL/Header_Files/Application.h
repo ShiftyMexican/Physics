@@ -35,6 +35,7 @@ struct Vertex {
 
 class Object;
 class FreeCamera;
+class MyPhysx;
 class Application
 {
 public:
@@ -73,6 +74,8 @@ protected:
 
 	// Camera Object
 	FreeCamera* myCamera;
+
+	MyPhysx* m_physx;
 
 	float m_currentTime;
 	float m_previousTime;

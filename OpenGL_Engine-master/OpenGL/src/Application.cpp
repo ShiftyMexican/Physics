@@ -1,5 +1,7 @@
 #include "Application.h"
 #include "FreeCamera.h"
+#include "MyPhysx.h"
+#include <Gizmos.h>
 using glm::vec3;
 using glm::vec4;
 using glm::mat4;
@@ -10,6 +12,8 @@ Application::Application()
 	// Calling of the Start up Function
 	StartUp();
 	//---------------------------------
+
+	Gizmos::create();
 
 	// Initialization for the Free Camera ---------------------------------------
 	myCamera = new FreeCamera(window);
@@ -26,6 +30,11 @@ Application::~Application()
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
+
+	m_physx->GetScene()->release();
+	m_physx->GetPhysics()->release();
+	m_physx->GetFoundation()->release();
+
 	return;
 }
 
@@ -78,6 +87,9 @@ void Application::StartUp()
 
 	// Setting the Colour of the window--------------------------------------------
 	glClearColor(0.1f, 0.1f, 0.1f, 1);
+
+	m_physx = new MyPhysx(window);
+
 	//glEnable(GL_FRONT_AND_BACK);
 	//-----------------------------------------------------------------------------
 }
@@ -90,12 +102,14 @@ void Application::Update()
 	deltaTime = m_currentTime - m_previousTime; 
 	m_previousTime = m_currentTime;
 	//-------------------------------------------------------------------------
+
+	m_physx->Update(deltaTime);
 }
 
 // Draw Function
 void Application::Draw()
 {
-
+	m_physx->Draw();
 }
 
 // Load Shader Function

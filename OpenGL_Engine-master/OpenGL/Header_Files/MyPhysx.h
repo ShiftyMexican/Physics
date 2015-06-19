@@ -10,22 +10,22 @@
 #include <PxPhysicsAPI.h>
 #include <PxScene.h>
 #include <pvd/PxVisualDebugger.h>
+#include "FreeCamera.h"
 
 using namespace physx;
 
 class MyAllocator : public PxAllocatorCallback
 {
 public:
-	
-	virtual ~MyAllocator();
+	virtual ~MyAllocator() {}
 
-	virtual void* Allocate(size_t size, const char* typeName, const char* filename, int line)
+	virtual void* allocate(size_t size, const char* typeName, const char* filename, int line)
 	{
 		void* pointer = _aligned_malloc(size, 16);
 		return pointer;
 	}
 
-	virtual void Deallocate(void* ptr)
+	virtual void deallocate(void* ptr)
 	{
 		_aligned_free(ptr);
 	}
@@ -39,8 +39,25 @@ private:
 class MyPhysx
 {
 public:
-	MyPhysx();
+	MyPhysx(GLFWwindow* window);
 	~MyPhysx();
+
+	void SetUpPhysx();
+
+	void UpdatePhysx(float deltaTime);
+	
+	void SetUpTutorial();
+
+	void Update(float deltaTime);
+
+	void Draw();
+
+	PxFoundation* GetFoundation() { return m_physicsFoundation; }
+	PxPhysics* GetPhysics() { return m_physics; }
+	PxScene* GetScene() { return m_physicsScene; }
+	PxMaterial* GetPhysicsMaterial() { return m_physicsMaterial; }
+	PxMaterial* GetBoxMaterial() { return m_boxMaterial; }
+	PxCooking* GetPhysicsCooker() { return m_physicsCooker; }
 
 private:
 
@@ -49,8 +66,12 @@ private:
 	PxScene* m_physicsScene;
 	PxDefaultErrorCallback m_defaultErrorCallback;
 	PxDefaultAllocator m_defaultAllocatorCallback;
+	PxMaterial* m_physicsMaterial;
+	PxMaterial* m_boxMaterial;
+	PxCooking* m_physicsCooker;
 	PxSimulationFilterShader m_defaultFilterShader = PxDefaultSimulationFilterShader;
 
+	FreeCamera* m_camera;
 
 };
 
