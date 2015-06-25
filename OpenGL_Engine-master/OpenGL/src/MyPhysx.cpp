@@ -10,6 +10,7 @@ using namespace physx;
 MyPhysx::MyPhysx(GLFWwindow* window)
 {
 	SetUpPhysx();
+	SetUpVisualDebugger();
 	SetUpTutorial();
 
 	m_camera = new FreeCamera(window);
@@ -34,6 +35,10 @@ void MyPhysx::Draw()
 	Gizmos::clear();
 
 	Gizmos::addAABBFilled(glm::vec3(0, 0, 0), glm::vec3(100, 0.0001, 100), glm::vec4(0.4, 0.2, 0, 1), nullptr);
+	Gizmos::addAABBFilled(glm::vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z), glm::vec3(2, 2, 2), glm::vec4(0, 0, 0, 1));
+	
+	vec3 pos = vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z);
+	std::cout << "Position: " << pos.x << " , " << pos.y  << " , " << pos.z << "\n";
 
 	Gizmos::draw(m_camera->GetProjectionView());
 }
@@ -65,6 +70,18 @@ void MyPhysx::UpdatePhysx(float deltaTime)
 	}
 }
 
+void MyPhysx::SetUpVisualDebugger()
+{
+	if (m_physics->getPvdConnectionManager() == NULL)
+		return;
+
+	const char* pvd_host_ip = "127.0.0.1";
+	int port = 5425;
+	unsigned int timeout = 100;
+	PxVisualDebuggerConnectionFlags connectionFlags = PxVisualDebuggerExt::getAllConnectionFlags();
+	auto theConnection = PxVisualDebuggerExt::createConnection(m_physics->getPvdConnectionManager(), pvd_host_ip, port, timeout, connectionFlags);
+}
+
 void MyPhysx::SetUpTutorial()
 {
 	// Add a plane
@@ -75,10 +92,14 @@ void MyPhysx::SetUpTutorial()
 
 	// Add a Box
 	float density = 1;
-	PxBoxGeometry box(2, 2, 2);
-	PxTransform transform(PxVec3(0, 5, 0));
-	PxRigidDynamic* dynamicActor = PxCreateDynamic(*m_physics, transform, box, *m_physicsMaterial, density);
-	
+	m_box = PxVec3(2, 2, 2);
+	PxTransform transform(PxVec3(0, 15, 0));
+	m_dynamicActor = PxCreateDynamic(*m_physics, transform, m_box, *m_physicsMaterial, density);
+
 	// Add it to the scene
-	m_physicsScene->addActor(*dynamicActor);
+	m_physicsScene->addActor(*m_dynamicActor);
+
+	vec3 pos = vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z);
+	std::cout << "Position: " << pos.x << " , " << pos.y << " , " << pos.z << "\n";
+
 }

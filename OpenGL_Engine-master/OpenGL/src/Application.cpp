@@ -89,6 +89,7 @@ void Application::StartUp()
 	glClearColor(0.1f, 0.1f, 0.1f, 1);
 
 	m_physx = new MyPhysx(window);
+	m_previousTime = (float)glfwGetTime();
 
 	//glEnable(GL_FRONT_AND_BACK);
 	//-----------------------------------------------------------------------------

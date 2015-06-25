@@ -45,6 +45,8 @@ public:
 	void SetUpPhysx();
 
 	void UpdatePhysx(float deltaTime);
+
+	void SetUpVisualDebugger();
 	
 	void SetUpTutorial();
 
@@ -70,6 +72,9 @@ private:
 	PxMaterial* m_boxMaterial;
 	PxCooking* m_physicsCooker;
 	PxSimulationFilterShader m_defaultFilterShader = PxDefaultSimulationFilterShader;
+
+	PxBoxGeometry m_box;
+	PxRigidDynamic* m_dynamicActor;
 
 	FreeCamera* m_camera;
 
