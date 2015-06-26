@@ -5,10 +5,17 @@
 #include <Gizmos.h>
 #include "FreeCamera.h"
 
+#include <gl_core_4_4.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
+using namespace glm;
 using namespace physx;
 
 MyPhysx::MyPhysx(GLFWwindow* window)
 {
+
 	SetUpPhysx();
 	SetUpVisualDebugger();
 	SetUpTutorial();
@@ -17,6 +24,7 @@ MyPhysx::MyPhysx(GLFWwindow* window)
 	m_camera->SetupPerspective(glm::pi<float>() * 0.25f, 1240.0f / 768.0f);
 	m_camera->LookAt(vec3(50, 50, 50), vec3(0), vec3(0, 1, 0));
 	m_camera->SetFlySpeed(100.0f);
+
 }
 
 MyPhysx::~MyPhysx()
@@ -28,17 +36,17 @@ void MyPhysx::Update(float deltaTime)
 {
 	m_camera->Update(deltaTime);
 	UpdatePhysx(deltaTime);
+
 }
 
 void MyPhysx::Draw()
 {
 	Gizmos::clear();
 
-	Gizmos::addAABBFilled(glm::vec3(0, 0, 0), glm::vec3(100, 0.0001, 100), glm::vec4(0.4, 0.2, 0, 1), nullptr);
-	Gizmos::addAABBFilled(glm::vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z), glm::vec3(2, 2, 2), glm::vec4(0, 0, 0, 1));
-	
-	vec3 pos = vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z);
-	std::cout << "Position: " << pos.x << " , " << pos.y  << " , " << pos.z << "\n";
+	glm::mat4 newRot = TransformToMat4(m_dynamicActor->getGlobalPose());
+
+	Gizmos::addAABBFilled(glm::vec3(0, 0, 0), glm::vec3(100, 0.0001, 100), glm::vec4(0.25, 0.25, 0.25, 1), nullptr);
+	Gizmos::addAABBFilled(glm::vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z), glm::vec3(2, 2, 2), glm::vec4(0, 0.7, 0.7, 1), &newRot);
 
 	Gizmos::draw(m_camera->GetProjectionView());
 }
@@ -93,7 +101,7 @@ void MyPhysx::SetUpTutorial()
 	// Add a Box
 	float density = 1;
 	m_box = PxVec3(2, 2, 2);
-	PxTransform transform(PxVec3(0, 15, 0));
+	PxTransform transform(PxVec3(0, 50, 0));
 	m_dynamicActor = PxCreateDynamic(*m_physics, transform, m_box, *m_physicsMaterial, density);
 
 	// Add it to the scene
@@ -102,4 +110,9 @@ void MyPhysx::SetUpTutorial()
 	vec3 pos = vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z);
 	std::cout << "Position: " << pos.x << " , " << pos.y << " , " << pos.z << "\n";
 
+}
+
+glm::mat4 MyPhysx::TransformToMat4(PxTransform transform)
+{
+	return mat4_cast(quat(transform.q.w, transform.q.x, transform.q.y, transform.q.z));
 }

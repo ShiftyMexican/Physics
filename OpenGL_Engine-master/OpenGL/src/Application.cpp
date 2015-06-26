@@ -86,7 +86,7 @@ void Application::StartUp()
 	//----------------------------------------------------------------------------
 
 	// Setting the Colour of the window--------------------------------------------
-	glClearColor(0.1f, 0.1f, 0.1f, 1);
+	glClearColor(0, 0, 0, 1);
 
 	m_physx = new MyPhysx(window);
 	m_previousTime = (float)glfwGetTime();

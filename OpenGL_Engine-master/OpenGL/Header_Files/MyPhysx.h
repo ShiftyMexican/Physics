@@ -12,6 +12,11 @@
 #include <pvd/PxVisualDebugger.h>
 #include "FreeCamera.h"
 
+#include <gl_core_4_4.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
 using namespace physx;
 
 class MyAllocator : public PxAllocatorCallback
@@ -54,6 +59,8 @@ public:
 
 	void Draw();
 
+	glm::mat4 TransformToMat4(PxTransform transform);
+
 	PxFoundation* GetFoundation() { return m_physicsFoundation; }
 	PxPhysics* GetPhysics() { return m_physics; }
 	PxScene* GetScene() { return m_physicsScene; }
@@ -77,6 +84,8 @@ private:
 	PxRigidDynamic* m_dynamicActor;
 
 	FreeCamera* m_camera;
+
+	glm::mat4 m_transform;
 
 };
 
