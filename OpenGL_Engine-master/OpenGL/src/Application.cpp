@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "FreeCamera.h"
-#include "MyPhysx.h"
+//#include "MyPhysx.h"
 #include <Gizmos.h>
 using glm::vec3;
 using glm::vec4;
@@ -31,9 +31,9 @@ Application::~Application()
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
-	m_physx->GetScene()->release();
-	m_physx->GetPhysics()->release();
-	m_physx->GetFoundation()->release();
+	//m_physx->GetScene()->release();
+	//m_physx->GetPhysics()->release();
+	//m_physx->GetFoundation()->release();
 
 	return;
 }
@@ -88,7 +88,7 @@ void Application::StartUp()
 	// Setting the Colour of the window--------------------------------------------
 	glClearColor(0, 0, 0, 1);
 
-	m_physx = new MyPhysx(window);
+	//m_physx = new MyPhysx(window);
 	m_previousTime = (float)glfwGetTime();
 
 	//glEnable(GL_FRONT_AND_BACK);
@@ -104,13 +104,13 @@ void Application::Update()
 	m_previousTime = m_currentTime;
 	//-------------------------------------------------------------------------
 
-	m_physx->Update(deltaTime);
+	//m_physx->Update(deltaTime);
 }
 
 // Draw Function
 void Application::Draw()
 {
-	m_physx->Draw();
+	//m_physx->Draw();
 }
 
 // Load Shader Function

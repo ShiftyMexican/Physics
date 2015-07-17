@@ -83,7 +83,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dep\aieutilities\Gizmos_fix.cpp" />
+    <ClCompile Include="src\MyDIYPhysics.cpp" />
     <ClCompile Include="src\MyPhysx.cpp" />
+    <ClCompile Include="src\PhysicsObject.cpp" />
+    <ClCompile Include="src\PhysicsScene.cpp" />
+    <ClCompile Include="src\RigidBody.cpp" />
     <ClCompile Include="src\Shadow.cpp" />
     <ClCompile Include="src\GroundSurface.cpp" />
     <ClCompile Include="src\RenderTarget.cpp" />
@@ -97,6 +101,7 @@
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\ParticleSystem.cpp" />
     <ClCompile Include="src\SkyBox.cpp" />
+    <ClCompile Include="src\Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dep\aieutilities\Gizmos.h" />
@@ -107,12 +112,17 @@
     <ClInclude Include="Header_Files\Application.h" />
     <ClInclude Include="Header_Files\Camera.h" />
     <ClInclude Include="Header_Files\FreeCamera.h" />
+    <ClInclude Include="Header_Files\MyDIYPhysics.h" />
     <ClInclude Include="Header_Files\MyPhysx.h" />
     <ClInclude Include="Header_Files\Object.h" />
     <ClInclude Include="Header_Files\ParticleSystem.h" />
+    <ClInclude Include="Header_Files\PhysicsObject.h" />
+    <ClInclude Include="Header_Files\PhysicsScene.h" />
+    <ClInclude Include="Header_Files\RigidBody.h" />
     <ClInclude Include="Header_Files\SkyBox.h" />
     <ClInclude Include="Header_Files\RenderTarget.h" />
     <ClInclude Include="Header_Files\Shadow.h" />
+    <ClInclude Include="Header_Files\Sphere.h" />
     <ClInclude Include="src\gl_core_4_4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
