@@ -16,10 +16,14 @@ public:
 	Sphere(glm::vec3 position, glm::vec3 velocity, float mass, float radius, glm::vec4 colour);
 	~Sphere();
 
-	void Update();
+	void Update(float deltaTime);
 	void Draw();
 
-	float radius;
+	float m_radius;
+	glm::vec3 m_position;
+	glm::vec3 m_velocity;
+	float m_mass;
+	glm::vec4 m_colour;
 
 private:
 

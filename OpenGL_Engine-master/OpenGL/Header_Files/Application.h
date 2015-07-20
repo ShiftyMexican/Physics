@@ -15,8 +15,9 @@
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-
 #include "Object.h"
+
+#include "PhysicsScene.h"
 
 
 struct GridVertex {
@@ -76,6 +77,8 @@ protected:
 	FreeCamera* myCamera;
 
 	MyPhysx* m_physx;
+
+	PhysicsScene* m_DIYScene;
 
 	float m_currentTime;
 	float m_previousTime;

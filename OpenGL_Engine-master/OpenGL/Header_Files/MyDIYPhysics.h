@@ -1,7 +1,7 @@
 /*
 	Author: Jarrod Dowsey
 	Description: Physics scene
-*/
+
 
 #ifndef	MY_DIY_PHYSICS_SCENE_H
 #define MY_DIY_PHYSICS_SCENE_H
@@ -21,3 +21,4 @@ private:
 
 
 #endif
+*/

@@ -89,6 +89,8 @@ void Application::StartUp()
 	glClearColor(0, 0, 0, 1);
 
 	//m_physx = new MyPhysx(window);
+	m_DIYScene = new PhysicsScene(window);
+
 	m_previousTime = (float)glfwGetTime();
 
 	//glEnable(GL_FRONT_AND_BACK);
@@ -105,12 +107,14 @@ void Application::Update()
 	//-------------------------------------------------------------------------
 
 	//m_physx->Update(deltaTime);
+	m_DIYScene->Update(deltaTime);
 }
 
 // Draw Function
 void Application::Draw()
 {
 	//m_physx->Draw();
+	m_DIYScene->Draw();
 }
 
 // Load Shader Function
