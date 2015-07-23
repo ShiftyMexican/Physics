@@ -20,7 +20,7 @@ class PhysicsObject
 public:
 	ShapeType _shapeID;
 	virtual void Update(glm::vec3 gravity, float timeStep) = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(){}
 
 private:
 

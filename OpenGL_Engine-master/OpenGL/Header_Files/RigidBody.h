@@ -22,10 +22,10 @@ public:
 	void ApplyForce(glm::vec3 force);
 	void ApplyForceToActor(RigidBody* actor2, glm::vec3 force);
 
-	glm::vec3 position;
-	glm::vec3 velocity;
-	glm::quat rotation3D;
-	float mass;
+	glm::vec3 m_position;
+	glm::vec3 m_velocity;
+	glm::quat m_rotation3D;
+	float m_mass;
 
 
 private:

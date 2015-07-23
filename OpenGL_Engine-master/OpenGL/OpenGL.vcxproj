@@ -59,6 +59,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./dep/glfw/lib-vc2013;./dep/AntTweakBar/lib;./dep/FBXLoader;./dep/Physx/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;AntTweakBar.lib;FBXLoader_d.lib;PhysX3DEBUG_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysX3CommonDEBUG_x86.lib;PhysX3VehicleDEBUG.lib;PhysX3CharacterKinematicDEBUG_x86.lib;PhysX3CookingDEBUG_x86.lib;PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -87,6 +88,7 @@
     <ClCompile Include="src\MyPhysx.cpp" />
     <ClCompile Include="src\PhysicsObject.cpp" />
     <ClCompile Include="src\PhysicsScene.cpp" />
+    <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\RigidBody.cpp" />
     <ClCompile Include="src\Shadow.cpp" />
     <ClCompile Include="src\GroundSurface.cpp" />
@@ -118,6 +120,7 @@
     <ClInclude Include="Header_Files\ParticleSystem.h" />
     <ClInclude Include="Header_Files\PhysicsObject.h" />
     <ClInclude Include="Header_Files\PhysicsScene.h" />
+    <ClInclude Include="Header_Files\Plane.h" />
     <ClInclude Include="Header_Files\RigidBody.h" />
     <ClInclude Include="Header_Files\SkyBox.h" />
     <ClInclude Include="Header_Files\RenderTarget.h" />

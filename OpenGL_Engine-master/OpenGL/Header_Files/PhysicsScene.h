@@ -27,6 +27,8 @@ public:
 	void Update(float deltaTime);
 	void Draw();
 
+	bool SphereToPlaneCollision(PhysicsObject* object1, PhysicsObject* object2);
+
 private:
 
 	FreeCamera* m_camera;
