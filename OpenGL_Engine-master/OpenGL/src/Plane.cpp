@@ -13,7 +13,7 @@ Plane::~Plane()
 	
 }
 
-void Plane::Update(glm::vec3 gravity, float deltaTime)
+void Plane::Update(const glm::vec3& gravity, float deltaTime)
 {
 
 }
@@ -25,5 +25,5 @@ void Plane::Draw()
 	glm::vec3 start = centrePoint + (parallel * 300.0f);
 	glm::vec3 end = centrePoint - (parallel * 300.0f);
 
-	Gizmos::addAABBFilled(centrePoint, glm::vec3(100, 0, 100), glm::vec4(0, 0, 1, 1));
+	Gizmos::addAABBFilled(centrePoint, glm::vec3(100, 0, 100), glm::vec4(0.25, 0.25, 0.25, 1));
 }

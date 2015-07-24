@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dep\aieutilities\Gizmos_fix.cpp" />
+    <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\MyDIYPhysics.cpp" />
     <ClCompile Include="src\MyPhysx.cpp" />
     <ClCompile Include="src\PhysicsObject.cpp" />
@@ -104,10 +105,12 @@
     <ClCompile Include="src\ParticleSystem.cpp" />
     <ClCompile Include="src\SkyBox.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
+    <ClCompile Include="src\Spring.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dep\aieutilities\Gizmos.h" />
     <ClInclude Include="dep\glfw\include\GLFW\glfw3.h" />
+    <ClInclude Include="Header_Files\Box.h" />
     <ClInclude Include="Header_Files\FBXObject.h" />
     <ClInclude Include="Header_Files\GroundSurface.h" />
     <ClInclude Include="Header_Files\MyAntTweakBar.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="Header_Files\RenderTarget.h" />
     <ClInclude Include="Header_Files\Shadow.h" />
     <ClInclude Include="Header_Files\Sphere.h" />
+    <ClInclude Include="Header_Files\Spring.h" />
     <ClInclude Include="src\gl_core_4_4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "FreeCamera.h"
-//#include "MyPhysx.h"
+#include "MyPhysx.h"
 #include <Gizmos.h>
 using glm::vec3;
 using glm::vec4;
@@ -31,9 +31,9 @@ Application::~Application()
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
-	//m_physx->GetScene()->release();
-	//m_physx->GetPhysics()->release();
-	//m_physx->GetFoundation()->release();
+	m_physx->GetScene()->release();
+	m_physx->GetPhysics()->release();
+	m_physx->GetFoundation()->release();
 
 	return;
 }
@@ -88,7 +88,10 @@ void Application::StartUp()
 	// Setting the Colour of the window--------------------------------------------
 	glClearColor(0, 0, 0, 1);
 
-	//m_physx = new MyPhysx(window);
+	m_physxActive = false;
+	m_isKeyPressed = false;
+
+	m_physx = new MyPhysx(window);
 	m_DIYScene = new PhysicsScene(window);
 
 	m_previousTime = (float)glfwGetTime();
@@ -100,21 +103,45 @@ void Application::StartUp()
 // Update Function
 void Application::Update()
 {
+	if (glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS && !m_isKeyPressed)
+	{
+		m_physxActive = !m_physxActive;
+	}
+
 	// Creating DeltaTime Calculations-----------------------------------------
 	m_currentTime = (float)glfwGetTime();
 	deltaTime = m_currentTime - m_previousTime; 
 	m_previousTime = m_currentTime;
 	//-------------------------------------------------------------------------
-
-	//m_physx->Update(deltaTime);
-	m_DIYScene->Update(deltaTime);
+	switch (m_physxActive)
+	{
+	case 0: 
+		m_DIYScene->Update(deltaTime);
+		break;
+	case 1:
+		m_physx->Update(deltaTime);
+		break;
+	}
+	
+	m_isKeyPressed = false;
+	if (glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+	{
+		m_isKeyPressed = true;
+	}
 }
 
 // Draw Function
 void Application::Draw()
 {
-	//m_physx->Draw();
-	m_DIYScene->Draw();
+	switch (m_physxActive)
+	{
+	case 0:
+		m_DIYScene->Draw();
+		break;
+	case 1:
+		m_physx->Draw();
+		break;
+	}
 }
 
 // Load Shader Function

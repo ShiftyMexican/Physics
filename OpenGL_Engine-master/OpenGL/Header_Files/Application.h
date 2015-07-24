@@ -83,6 +83,9 @@ protected:
 	float m_currentTime;
 	float m_previousTime;
 
+	bool m_physxActive;
+	bool m_isKeyPressed;
+
 };
 
 #endif

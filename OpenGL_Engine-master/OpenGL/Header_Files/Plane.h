@@ -16,7 +16,7 @@ public:
 	Plane();
 	~Plane();
 
-	virtual void Update(glm::vec3 gravity, float deltaTime) override;
+	virtual void Update(const glm::vec3& gravity, float deltaTime) override;
 	virtual void Draw();
 
 	glm::vec3 GetNormal() { return m_normal; }

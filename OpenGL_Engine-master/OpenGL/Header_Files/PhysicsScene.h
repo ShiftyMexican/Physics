@@ -28,10 +28,14 @@ public:
 	void Draw();
 
 	bool SphereToPlaneCollision(PhysicsObject* object1, PhysicsObject* object2);
+	bool SphereToSphereCollision(PhysicsObject* object1, PhysicsObject* object2);
+	bool SphereToAABBCollision(PhysicsObject* object1, PhysicsObject* object2);
 
 private:
 
 	FreeCamera* m_camera;
+	GLFWwindow* m_window;
+	float m_timer;
 
 };
 #endif

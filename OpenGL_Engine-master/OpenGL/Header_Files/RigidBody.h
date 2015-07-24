@@ -13,10 +13,10 @@
 class RigidBody : public PhysicsObject
 {
 public:
-	RigidBody(glm::vec3 position, glm::vec3 velocity, glm::quat rotation, float mass);
+	RigidBody(const glm::vec3& position, const glm::vec3& velocity, const glm::quat& rotation, float mass, float friction);
 	~RigidBody();
 
-	virtual void Update(glm::vec3 gravity, float timeStep);
+	virtual void Update(const glm::vec3& gravity, float timeStep);
 	virtual void Draw();
 
 	void ApplyForce(glm::vec3 force);
@@ -26,6 +26,7 @@ public:
 	glm::vec3 m_velocity;
 	glm::quat m_rotation3D;
 	float m_mass;
+	float m_dynamicFrictionCoefficient;
 
 
 private:

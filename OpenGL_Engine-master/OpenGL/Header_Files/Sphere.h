@@ -13,7 +13,7 @@
 class Sphere : public RigidBody
 {
 public:
-	Sphere(glm::vec3 position, glm::vec3 velocity, float mass, float radius, glm::vec4 colour);
+	Sphere(const glm::vec3& position, const glm::vec3& velocity, float mass, float radius, const glm::vec4& colour, float friction);
 	~Sphere();
 
 	void Draw();
