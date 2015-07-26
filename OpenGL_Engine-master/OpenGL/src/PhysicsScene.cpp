@@ -93,7 +93,7 @@ void PhysicsScene::Update(float deltaTime)
 			if (actor->_shapeID == ShapeType::SHPERE)
 			{
 				Sphere* sphere = dynamic_cast<Sphere*>(actor);
-				sphere->ApplyForce(glm::vec3(0, 50, 0));
+				sphere->ApplyForce(glm::vec3(5, 50, 0));
 			}
 			
 		}

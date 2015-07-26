@@ -81,6 +81,8 @@ private:
 	PxSimulationFilterShader m_defaultFilterShader = PxDefaultSimulationFilterShader;
 
 	PxBoxGeometry m_box;
+	PxBoxGeometry m_wall;
+	PxRigidStatic* m_staticWall;
 	PxRigidDynamic* m_dynamicActor;
 
 	FreeCamera* m_camera;

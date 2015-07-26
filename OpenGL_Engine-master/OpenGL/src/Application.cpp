@@ -116,10 +116,10 @@ void Application::Update()
 	switch (m_physxActive)
 	{
 	case 0: 
-		m_DIYScene->Update(deltaTime);
+		m_physx->Update(deltaTime);
 		break;
 	case 1:
-		m_physx->Update(deltaTime);
+		m_DIYScene->Update(deltaTime);
 		break;
 	}
 	
@@ -136,10 +136,10 @@ void Application::Draw()
 	switch (m_physxActive)
 	{
 	case 0:
-		m_DIYScene->Draw();
+		m_physx->Draw();
 		break;
 	case 1:
-		m_physx->Draw();
+		m_DIYScene->Draw();
 		break;
 	}
 }

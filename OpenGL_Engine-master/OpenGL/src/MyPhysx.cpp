@@ -22,7 +22,7 @@ MyPhysx::MyPhysx(GLFWwindow* window)
 
 	m_camera = new FreeCamera(window);
 	m_camera->SetupPerspective(glm::pi<float>() * 0.25f, 1240.0f / 768.0f);
-	m_camera->LookAt(vec3(50, 50, 50), vec3(0), vec3(0, 1, 0));
+	m_camera->LookAt(vec3(200, 50, 200), vec3(0), vec3(0, 1, 0));
 	m_camera->SetFlySpeed(100.0f);
 
 }
@@ -36,7 +36,6 @@ void MyPhysx::Update(float deltaTime)
 {
 	m_camera->Update(deltaTime);
 	UpdatePhysx(deltaTime);
-
 }
 
 void MyPhysx::Draw()
@@ -47,6 +46,7 @@ void MyPhysx::Draw()
 
 	Gizmos::addAABBFilled(glm::vec3(0, 0, 0), glm::vec3(100, 0.0001, 100), glm::vec4(0.25, 0.25, 0.25, 1), nullptr);
 	Gizmos::addAABBFilled(glm::vec3(m_dynamicActor->getGlobalPose().p.x, m_dynamicActor->getGlobalPose().p.y, m_dynamicActor->getGlobalPose().p.z), glm::vec3(2, 2, 2), glm::vec4(0, 0.7, 0.7, 1), &newRot);
+	Gizmos::addAABBFilled(glm::vec3(m_staticWall->getGlobalPose().p.x, m_staticWall->getGlobalPose().p.y, m_staticWall->getGlobalPose().p.z), glm::vec3(5, 50, 100), glm::vec4(1, 0, 0, 1));
 
 	Gizmos::draw(m_camera->GetProjectionView());
 }
@@ -57,6 +57,7 @@ void MyPhysx::SetUpPhysx()
 	m_physicsFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, *myCallback, m_defaultErrorCallback);
 	m_physics = PxCreatePhysics(PX_PHYSICS_VERSION, *m_physicsFoundation, PxTolerancesScale());
 	PxInitExtensions(*m_physics);
+
 	// Create physics material
 	m_physicsMaterial = m_physics->createMaterial(0.5f, 0.5f, 0.5f);
 	PxSceneDesc sceneDesc(m_physics->getTolerancesScale());
@@ -99,10 +100,20 @@ void MyPhysx::SetUpTutorial()
 	m_physicsScene->addActor(*plane);
 
 	// Add a Box
-	float density = 1;
+	m_boxMaterial = m_physics->createMaterial(0.1f, 0.4f, 1.0f);
+	PxReal boxDensity = 2.0f;
+
 	m_box = PxVec3(2, 2, 2);
-	PxTransform transform(PxVec3(0, 50, 0));
-	m_dynamicActor = PxCreateDynamic(*m_physics, transform, m_box, *m_physicsMaterial, density);
+	PxTransform transform(PxVec3(0, 100, 0));
+	m_dynamicActor = PxCreateDynamic(*m_physics, transform, m_box, *m_boxMaterial, boxDensity);
+	m_dynamicActor->setAngularDamping(0.2f);
+	m_dynamicActor->setLinearDamping(0.01f);
+	m_dynamicActor->setMass(2);
+
+	// Adding a wall
+	m_wall = PxVec3(5, 50, 100);
+	PxTransform wallTransform(PxVec3(-100, 50, 0));
+	m_staticWall = PxCreateStatic(*m_physics, wallTransform, m_wall, *m_boxMaterial);
 
 	// Add it to the scene
 	m_physicsScene->addActor(*m_dynamicActor);
