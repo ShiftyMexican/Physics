@@ -83,6 +83,7 @@ private:
 	PxBoxGeometry m_box;
 	PxBoxGeometry m_wall;
 	PxRigidStatic* m_staticWall;
+	PxRigidStatic* m_staticWall2;
 	PxRigidDynamic* m_dynamicActor;
 
 	FreeCamera* m_camera;
