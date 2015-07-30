@@ -87,9 +87,12 @@
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\MyDIYPhysics.cpp" />
     <ClCompile Include="src\MyPhysx.cpp" />
+    <ClCompile Include="src\ParticleEmitter.cpp" />
+    <ClCompile Include="src\ParticleFluidEmitter.cpp" />
     <ClCompile Include="src\PhysicsObject.cpp" />
     <ClCompile Include="src\PhysicsScene.cpp" />
     <ClCompile Include="src\Plane.cpp" />
+    <ClCompile Include="src\Ragdoll.cpp" />
     <ClCompile Include="src\RigidBody.cpp" />
     <ClCompile Include="src\Shadow.cpp" />
     <ClCompile Include="src\GroundSurface.cpp" />
@@ -120,10 +123,13 @@
     <ClInclude Include="Header_Files\MyDIYPhysics.h" />
     <ClInclude Include="Header_Files\MyPhysx.h" />
     <ClInclude Include="Header_Files\Object.h" />
+    <ClInclude Include="Header_Files\ParticleEmitter.h" />
+    <ClInclude Include="Header_Files\ParticleFluidEmitter.h" />
     <ClInclude Include="Header_Files\ParticleSystem.h" />
     <ClInclude Include="Header_Files\PhysicsObject.h" />
     <ClInclude Include="Header_Files\PhysicsScene.h" />
     <ClInclude Include="Header_Files\Plane.h" />
+    <ClInclude Include="Header_Files\Ragdoll.h" />
     <ClInclude Include="Header_Files\RigidBody.h" />
     <ClInclude Include="Header_Files\SkyBox.h" />
     <ClInclude Include="Header_Files\RenderTarget.h" />

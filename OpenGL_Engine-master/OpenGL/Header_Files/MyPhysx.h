@@ -17,6 +17,11 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
+#include "ParticleEmitter.h"
+#include "ParticleFluidEmitter.h"
+
+#include "Ragdoll.h"
+
 using namespace physx;
 
 class MyAllocator : public PxAllocatorCallback
@@ -82,11 +87,24 @@ private:
 
 	PxBoxGeometry m_box;
 	PxBoxGeometry m_wall;
+	PxBoxGeometry m_wall2;
+	PxBoxGeometry m_wall3;
+	PxSphereGeometry m_ball;
+
 	PxRigidStatic* m_staticWall;
 	PxRigidStatic* m_staticWall2;
+	PxRigidStatic* m_staticWall3;
+	PxRigidStatic* m_staticWall4;
+	PxRigidStatic* m_staticWall5;
+	PxRigidStatic* m_staticWall6;
 	PxRigidDynamic* m_dynamicActor;
+	PxRigidDynamic* m_dynamicBall;
+
+	Ragdoll* m_ragdoll;
 
 	FreeCamera* m_camera;
+
+	ParticleFluidEmitter* m_emitter;
 
 	glm::mat4 m_transform;
 
