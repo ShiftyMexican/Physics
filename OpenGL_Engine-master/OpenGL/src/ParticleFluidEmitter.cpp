@@ -184,7 +184,7 @@ void ParticleFluidEmitter::renderParticles()
 				//If it has a density of 0 it has no neighbours, 1 is maximum neighbouts
 				//we can use this to decide if the particle is seperate or part of a larger body of fluid
 				glm::vec3 pos(positionIt->x,positionIt->y,positionIt->z);
-				Gizmos::addAABBFilled(pos,glm::vec3(.12,.12,.12),glm::vec4(1,0,1,1), nullptr, false);
+				Gizmos::addAABBFilled(pos,glm::vec3(.12,.12,.12),glm::vec4(0,0,1,1), nullptr, false);
 			}
 		}
 		// return ownership of the buffers back to the SDK

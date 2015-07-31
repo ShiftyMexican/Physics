@@ -11,6 +11,7 @@
 #include <PxScene.h>
 #include <pvd/PxVisualDebugger.h>
 #include "FreeCamera.h"
+#include <vector>
 
 #include <gl_core_4_4.h>
 #include <GLFW/glfw3.h>
@@ -21,6 +22,8 @@
 #include "ParticleFluidEmitter.h"
 
 #include "Ragdoll.h"
+#include "PlayerController.h"
+#include "TriggerVolume.h"
 
 using namespace physx;
 
@@ -45,7 +48,7 @@ private:
 };
 
 
-
+class Utilities;
 class MyPhysx
 {
 public:
@@ -63,6 +66,8 @@ public:
 	void Update(float deltaTime);
 
 	void Draw();
+
+	void InitializeParticles();
 
 	glm::mat4 TransformToMat4(PxTransform transform);
 
@@ -97,14 +102,23 @@ private:
 	PxRigidStatic* m_staticWall4;
 	PxRigidStatic* m_staticWall5;
 	PxRigidStatic* m_staticWall6;
+	PxRigidStatic* m_staticWall7;
 	PxRigidDynamic* m_dynamicActor;
 	PxRigidDynamic* m_dynamicBall;
 
 	Ragdoll* m_ragdoll;
+	PlayerController* m_player;
+	TriggerVolume* m_trigger;
+	PxRigidActor* m_triggerVolume;
+	PxShape* box;
+
+	std::vector<PxRigidActor*> m_actors;
 
 	FreeCamera* m_camera;
 
 	ParticleFluidEmitter* m_emitter;
+	PxParticleFluid* particleSystem;
+	PxU32 maxParticles;
 
 	glm::mat4 m_transform;
 

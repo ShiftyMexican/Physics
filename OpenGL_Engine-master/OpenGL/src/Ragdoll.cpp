@@ -1,5 +1,6 @@
 #include "Ragdoll.h"
 #include <Gizmos.h>
+#include "Utilities.h"
 
 Ragdoll::Ragdoll(PxPhysics* physics, PxMaterial* material, PxScene* scene)
 {
@@ -26,7 +27,7 @@ Ragdoll::Ragdoll(PxPhysics* physics, PxMaterial* material, PxScene* scene)
 
 	};
 
-	m_ragdoll = Ragdoll::MakeRagdoll(physics, ragdollData, PxTransform(PxVec3(10, 40, 0)), 0.1f, material);
+	m_ragdoll = Ragdoll::MakeRagdoll(physics, ragdollData, PxTransform(PxVec3(10, 20, 0)), 0.1f, material);
 	scene->addArticulation(*m_ragdoll);
 }
 
@@ -46,25 +47,25 @@ void Ragdoll::Draw()
 	PxArticulationLink** links = new PxArticulationLink*[nLinks];
 	m_ragdoll->getLinks(links, nLinks);
 
-
 	while (nLinks--)
 	{
 		PxArticulationLink* link = links[nLinks];
 		PxU32 nShapes = link->getNbShapes();
 		PxShape** shapes = new PxShape*[nShapes];
 		link->getShapes(shapes, nShapes);
+
 		while (nShapes--)
 		{
 
-			PxSphereGeometry geometry;
-			shapes[nShapes]->getSphereGeometry(geometry);
-			float radius = geometry.radius + 1;
-			glm::vec3 center;
-			center.x = link->getWorldBounds().getCenter().x;
-			center.y = link->getWorldBounds().getCenter().y;
-			center.z = link->getWorldBounds().getCenter().z;
+			//PxSphereGeometry geometry;
+			//shapes[nShapes]->getSphereGeometry(geometry);
+			//float radius = geometry.radius + 1;
+			//glm::vec3 center;
+			//center.x = link->getWorldBounds().getCenter().x;
+			//center.y = link->getWorldBounds().getCenter().y;
+			//center.z = link->getWorldBounds().getCenter().z;
 			//glm::mat4 newRot = Utils::TransformToMat4(_actor->getGlobalPose());
-			Gizmos::addSphere(center, radius, 5, 5, glm::vec4(1, 0, 0, 1));
+			Utilities::AddWidget(shapes[nShapes], link);
 		}
 	}
 	delete[] links;
@@ -108,7 +109,7 @@ PxArticulation* Ragdoll::MakeRagdoll(PxPhysics* _physics, RagdollNode** _nodeArr
 
 		currentNodePtr->linkPtr = link;
 
-		float jointSpace = 0.01f; // Gap Between joints
+		float jointSpace = 0.07f; // Gap Between joints
 
 		float capsuleHalfLength = (halfLength > jointSpace ? halfLength - jointSpace : 0) + 0.01f;
 
